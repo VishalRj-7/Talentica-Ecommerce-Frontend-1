@@ -1,0 +1,46 @@
+<div class="listing-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h3>Filters</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Category</mat-label>
+      <mat-select (selectionChange)="onCategoryChange($event.value)">
+        <mat-option value="">All</mat-option>
+        @for (category of categories; track category) {
+          <mat-option [value]="category">{{ category }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main-content">
+    <!-- Top Bar -->
+    <div class="topbar">
+      <h2>Product Listing</h2>
+      <mat-form-field appearance="outline" class="search-input">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Search products" [(ngModel)]="searchText" (ngModelChange)="applyFilter()"  />
+      </mat-form-field>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid">
+      @for (product of paginatedProducts | filter:searchText; track product.id) {
+        <mat-card class="product-card" [routerLink]="['/product', product.id]">
+          <img mat-card-image [src]="product.image" alt="{{ product.title }}" />
+          <mat-card-content>
+            <h3>{{ product.title }}</h3>
+            <p>${{ product.price }}</p>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  </main>
+</div>
+
+<div class="pagination-controls" *ngIf="totalPages > 1">
+  <button mat-button (click)="changePage(-1)" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button mat-button (click)="changePage(1)" [disabled]="currentPage === totalPages">Next</button>
+</div>
