@@ -10,10 +10,12 @@ import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { FilterPipe } from '../../pipes/filter.pipe';
 import { filter } from 'rxjs';
+import { MatIcon } from '@angular/material/icon';
+import { TopBarComponent } from '../top-bar/top-bar.component';
 
 @Component({
   selector: 'app-product-list',
-  imports: [ MatFormFieldModule,MatSelectModule,MatCardModule, FormsModule,RouterModule,CommonModule,MatInputModule,FilterPipe],
+  imports: [ MatFormFieldModule,MatSelectModule,MatCardModule, FormsModule,RouterModule,CommonModule,MatInputModule,FilterPipe,MatIcon,TopBarComponent],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })

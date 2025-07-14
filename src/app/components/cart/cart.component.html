@@ -1,1 +1,36 @@
-<p>cart works!</p>
+<div class="cart-container">
+  <!-- Cart header -->
+  <div class="cart-header">
+    <h2>Cart</h2>
+    <mat-form-field appearance="outline" class="search-box">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Search in cart..." [(ngModel)]="searchText" />
+    </mat-form-field>
+  </div>
+
+  <!-- Cart items -->
+  <div class="cart-items">
+    @for (item of filteredItems(); track item.id; let i = $index) {
+      <div class="cart-item">
+        <img [src]="item.image" alt="{{ item.title }}" />
+        <div class="item-info">
+          <p class="title">{{ item.title }}</p>
+          <p class="price">$ {{ item.price }}</p>
+        </div>
+        <button mat-icon-button color="warn" (click)="removeItem(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    }
+
+    @if (filteredItems().length === 0) {
+      <p class="empty-msg">No items match your search.</p>
+    }
+  </div>
+
+  <!-- Total and Checkout -->
+  <div class="cart-footer">
+    <p class="total">Total: ${{ getTotal() }}</p>
+    <button mat-raised-button color="primary">Checkout</button>
+  </div>
+</div>

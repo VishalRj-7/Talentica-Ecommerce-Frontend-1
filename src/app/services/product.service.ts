@@ -13,7 +13,7 @@ private readonly http = inject(HttpClient);
   }
 
   getProduct(id: number): Observable<Product> {
-    return this.http.get<Product>(`${this.API_URL}/${id}`);
+    return this.http.get<Product>(`${this.API_URL}/products/${id}`);
   }
 
   getAllCategories(): Observable<string[]> {
